@@ -1,6 +1,6 @@
 {
   "name": "lpr9201",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "920MHz wireless module LPR9201 driver",
   "keywords": [
     "hardware",
