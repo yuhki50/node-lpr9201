@@ -1,7 +1,10 @@
+/* jslint node: true */
+"use strict"
+
 //var LPR9201 = require('lpr9201');
 var LPR9201 = require('../lib');
 var Result = LPR9201.Result;
-var lpr9201Driver = new LPR9201.Driver('/dev/tty.usbserial-A90254T2', {baudrate: 9600}, false);
+var lpr9201Driver = new LPR9201.Driver('/dev/tty.usbserial', {baudrate: 9600}, false);
 
 lpr9201Driver.on('open', function() {
   console.log('open');
@@ -22,6 +25,7 @@ lpr9201Driver.on('data', function(data) {
 
   } else if (Result.ConnectionConfirmation.canParse(data)) {
     console.log('ConnectionConfirmation');
+    lpr9201Driver.send.activateRequest();
 
   } else if (Result.EdScan.canParse(data)) {
     var edScan = new Result.EdScan(data);
@@ -41,6 +45,7 @@ lpr9201Driver.on('data', function(data) {
 
   } else if (Result.Ring.canParse(data)) {
     console.log('Ring');
+    lpr9201Driver.send.readReceiveData();
 
   } else if (Result.Rssi.canParse(data)) {
     var rssi = new Result.Rssi(data);
