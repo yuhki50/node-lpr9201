@@ -89,6 +89,9 @@ describe('parser', function() {
     expect(result.resultCode).to.equal(Result.ReceiveData.RESULT_CODE);
     expect(result.dataLengthByteSize).to.equal(Result.ReceiveData.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
+
+    var receiveData = new Result.ReceiveData(result);
+    expect(receiveData.datas).to.eql(parsedData);
 	});
 
 	it('receiveRssi', function() {
@@ -230,7 +233,7 @@ describe('parser', function() {
 
     var edScan = new Result.EdScan(result);
 		for (var i = 0; i < parsedData.length; i++) {
-      expect(edScan.value[i + 33]).to.equal(parsedData[i]);  // start 33ch
+      expect(edScan.rssis[i + 33]).to.equal(parsedData[i]);  // start 33ch
 		}
 	});
 
@@ -251,7 +254,7 @@ describe('parser', function() {
 
     var edScan = new Result.EdScan(result);
 		for (var i = 0; i < parsedData.length; i++) {
-      expect(edScan.value[i + 33]).to.equal(parsedData[i]);  // start 33ch
+      expect(edScan.rssis[i + 33]).to.equal(parsedData[i]);  // start 33ch
 		}
 	});
 });
