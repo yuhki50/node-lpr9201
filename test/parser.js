@@ -41,7 +41,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.ConnectionConfirmation.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.ConnectionConfirmation.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.ConnectionConfirmation.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 	});
 
@@ -55,7 +54,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.Ack.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.Ack.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.Ack.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 	});
 
@@ -70,7 +68,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.Nack.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.Nack.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.Nack.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var nack = new Result.Nack(result);
@@ -87,7 +84,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.ReceiveData.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.ReceiveData.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.ReceiveData.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var receiveData = new Result.ReceiveData(result);
@@ -105,7 +101,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.Rssi.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.Rssi.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.Rssi.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var rssi = new Result.Rssi(result);
@@ -123,7 +118,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.ProfileParameterResult.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.ProfileParameterResult.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.ProfileParameterResult.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var profileParameterResult = new Result.ProfileParameterResult(result);
@@ -141,7 +135,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.ProfileParameterResult.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.ProfileParameterResult.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.ProfileParameterResult.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var profileParameterResult = new Result.ProfileParameterResult(result);
@@ -178,7 +171,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.ProfileParameterResult.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.ProfileParameterResult.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.ProfileParameterResult.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var profileParameterResult = new Result.ProfileParameterResult(result);
@@ -196,7 +188,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.Wup.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.Wup.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.Wup.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 	});
 
@@ -210,7 +201,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.Ring.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.Ring.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.Ring.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 	});
 
@@ -228,7 +218,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.EdScan.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.EdScan.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.EdScan.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var edScan = new Result.EdScan(result);
@@ -249,7 +238,6 @@ describe('parser', function() {
 		var result = this.receive(receiveDatas);
     expect(Result.EdScan.canParse(result)).to.be.true;
     expect(result.resultCode).to.equal(Result.EdScan.RESULT_CODE);
-    expect(result.dataLengthByteSize).to.equal(Result.EdScan.DATA_LENGTH_BYTE_SIZE);
     expect(result.datas).to.eql(parsedData);
 
     var edScan = new Result.EdScan(result);
