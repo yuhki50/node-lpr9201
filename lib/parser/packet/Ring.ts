@@ -1,30 +1,31 @@
-package com.yuhki50.lpr9201.parser.packet;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
 
 /**
  * RING
  */
-public class Ring implements IParsePacket {
+class Ring implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x87;
+    public static RESULT_CODE : number = 0x87;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    public static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    public result : Result;
 
     /**
      * RING
      *
      * @param result 結果クラス
      */
-    public Ring(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -33,8 +34,8 @@ public class Ring implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return Ring.RESULT_CODE;
     }
 
     /**
@@ -42,8 +43,8 @@ public class Ring implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return Ring.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -51,7 +52,7 @@ public class Ring implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == Ring.RESULT_CODE;
     }
 }

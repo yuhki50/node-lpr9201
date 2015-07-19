@@ -1,12 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import com.yuhki50.lpr9201.util.Util;
-import com.yuhki50.lpr9201.sender.option.SendOption;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /*
  * 結果
  * 送信成功時: Ack
@@ -14,31 +5,31 @@ import java.util.List;
  *
  * 送信失敗時: Nack
  */
-public class DataTransmission implements ISendPacket {
+class DataTransmission implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x01;
+    private static COMMAND_ID : number = 0x01;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 2;
+    private static DATA_LENGTH_BYTE_SIZE : number = 2;
 
     /**
      * 送信先アドレス
      */
-    public int destinationAddress;
+    public destinationAddress : number;
 
     /**
      * 送信データ
      */
-    public int[] data;
+    public data : number[];
 
     /**
      * 送信オプション
      */
-    public SendOption option;
+    public option : SendOption;
 
     /**
      * データ送信
@@ -48,7 +39,7 @@ public class DataTransmission implements ISendPacket {
      * @param data               送信するデータを設定 最大長は500オクテット
      * @param option             送信オプション
      */
-    public DataTransmission(int destinationAddress, int[] data, SendOption option) {
+    public DataTransmission(destinationAddress : number, data : number[], option : SendOption) {
         this.destinationAddress = destinationAddress;
         this.data = data;
         this.option = option;
@@ -59,8 +50,8 @@ public class DataTransmission implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return DataTransmission.COMMAND_ID;
     }
 
     /**
@@ -68,8 +59,8 @@ public class DataTransmission implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return DataTransmission.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -77,15 +68,11 @@ public class DataTransmission implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        List<Integer> datas = new ArrayList<Integer>();
-        datas.add(this.option.getOptionCode());
-        datas.addAll(Arrays.asList(Util.splitBigEndian(this.destinationAddress, 2)));
-
-        for (int d : this.data) {
-            datas.add(d & 0xFF);
-        }
-
+    public serialize() : number[] {
+        var datas : number = [];
+        datas.push(this.option.getOptionCode());
+        datas = datas.concat(Arrays.asList(Util.splitBigEndian(this.destinationAddress, 2)));
+        datas = datas.concat(this.data);
         return datas;
     }
 }

@@ -1,29 +1,23 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /*
  * 結果
  * 保存成功時: Ack
  * 保存失敗時: Nack
  */
-public class SaveProfile implements ISendPacket {
+class SaveProfile implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x06;
+    private static COMMAND_ID : number = 0x06;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * プロファイルNo
      */
-    public int profileNo;
+    public profileNo : number;
 
     /**
      * プロファイル保存
@@ -31,7 +25,7 @@ public class SaveProfile implements ISendPacket {
      *
      * @param profileNo 保存するプロファイル番号 0 ~ 1
      */
-    public SaveProfile(int profileNo) {
+    public SaveProfile(profileNo : number) {
         this.profileNo = profileNo;
     }
 
@@ -40,8 +34,8 @@ public class SaveProfile implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return SaveProfile.COMMAND_ID;
     }
 
     /**
@@ -49,8 +43,8 @@ public class SaveProfile implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return SaveProfile.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -58,7 +52,7 @@ public class SaveProfile implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>(Collections.singletonList(this.profileNo & 0xFF));
+    public serialize() : number[] {
+        return [this.profileNo & 0xFF];
     }
 }

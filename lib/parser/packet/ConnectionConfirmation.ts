@@ -1,33 +1,33 @@
-package com.yuhki50.lpr9201.parser.packet;
-
-import com.yuhki50.lpr9201.parser.option.AutoStartupErrorType;
-import com.yuhki50.lpr9201.parser.option.DeviceType;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
+/// <reference path='../option/AutoStartupErrorType.ts' />
+/// <reference path='../option/DeviceType.ts' />
 
 /**
  * 接続確認
  */
-public class ConnectionConfirmation implements IParsePacket {
+class ConnectionConfirmation implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x00;
+    public static RESULT_CODE : number = 0x00;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    public static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    public result : Result;
 
     /**
      * 接続確認
      *
      * @param result 結果クラス
      */
-    public ConnectionConfirmation(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -36,8 +36,8 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return ConnectionConfirmation.RESULT_CODE;
     }
 
     /**
@@ -45,8 +45,8 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ConnectionConfirmation.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -54,8 +54,8 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == ConnectionConfirmation.RESULT_CODE;
     }
 
     /**
@@ -63,9 +63,10 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return エラー種別
      */
-    public AutoStartupErrorType getErrorType() {
+    public getErrorType() : AutoStartupErrorType{
         if (!this.hasErrorType()) {
-            throw new RuntimeException("Error type not found");
+            //FIXME
+            //throw new RuntimeException("Error type not found");
         }
 
         return AutoStartupErrorType.getEnumByErrorCode(this.result.datas[0]);
@@ -76,7 +77,7 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return エラー種別を取得出来る時はtrue
      */
-    public boolean hasErrorType() {
+    public hasErrorType() : boolean {
         return this.result.datas.length == 1;
     }
 
@@ -85,11 +86,12 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return 自ノードアドレス
      */
-    public int getNodeAddress() {
-        int[] datas = this.result.datas;
+    public getNodeAddress() : number {
+        var datas : number[] = this.result.datas;
 
         if (!this.hasNodeAddress()) {
-            throw new RuntimeException("Self node address not found");
+            //FIXME
+            //throw new RuntimeException("Self node address not found");
         }
 
         return (datas[0] << 8) | datas[1];
@@ -100,7 +102,7 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return 自ノードアドレスを取得出来る場合はtrue
      */
-    public boolean hasNodeAddress() {
+    public hasNodeAddress() : boolean {
         return this.result.datas.length == 2;
     }
 
@@ -109,8 +111,8 @@ public class ConnectionConfirmation implements IParsePacket {
      *
      * @return デバイスタイプ
      */
-    public DeviceType getDeviceType() {
-        int length = this.result.datas.length;
+    public getDeviceType() : DeviceType {
+        var length : number = this.result.datas.length;
 
         if (length == 1) {
             return DeviceType.COORDINATOR;

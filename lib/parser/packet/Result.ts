@@ -1,52 +1,59 @@
-package com.yuhki50.lpr9201.parser.packet;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+/// <reference path='Ack.ts' />
+/// <reference path='AditionalReceiveData.ts' />
+/// <reference path='ConnectionConfirmation.ts' />
+/// <reference path='ConnectionNotification.ts' />
+/// <reference path='ConnectionResult.ts' />
+/// <reference path='EdScan.ts' />
+/// <reference path='Nack.ts' />
+/// <reference path='ProfileParameter.ts' />
+/// <reference path='ReceiveData.ts' />
+/// <reference path='Ring.ts' />
+/// <reference path='Rssi.ts' />
+/// <reference path='SecurityConfig.ts' />
+/// <reference path='WirelessSecurityError.ts' />
+/// <reference path='Wup.ts' />
 
 /**
  * リザルト
  */
-public class Result {
+class Result {
     /**
      * データ長バイトサイズ一覧
      */
-    public static final Map<Integer, Integer> DATA_LENGTH_BYTE_SIZE_MAP;
-
-    static {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        map.put(Ack.RESULT_CODE, Ack.DATA_LENGTH_BYTE_SIZE);
-        map.put(AditionalReceiveData.RESULT_CODE, AditionalReceiveData.DATA_LENGTH_BYTE_SIZE);
-        map.put(ConnectionConfirmation.RESULT_CODE, ConnectionConfirmation.DATA_LENGTH_BYTE_SIZE);
-        map.put(ConnectionNotification.RESULT_CODE, ConnectionNotification.DATA_LENGTH_BYTE_SIZE);
-        map.put(ConnectionResult.RESULT_CODE, ConnectionResult.DATA_LENGTH_BYTE_SIZE);
-        map.put(EdScan.RESULT_CODE, EdScan.DATA_LENGTH_BYTE_SIZE);
-        map.put(Nack.RESULT_CODE, Nack.DATA_LENGTH_BYTE_SIZE);
-        map.put(ProfileParameter.RESULT_CODE, Nack.DATA_LENGTH_BYTE_SIZE);
-        map.put(ReceiveData.RESULT_CODE, ReceiveData.DATA_LENGTH_BYTE_SIZE);
-        map.put(Ring.RESULT_CODE, Ring.DATA_LENGTH_BYTE_SIZE);
-        map.put(Rssi.RESULT_CODE, Rssi.DATA_LENGTH_BYTE_SIZE);
-        map.put(SecurityConfig.RESULT_CODE, SecurityConfig.DATA_LENGTH_BYTE_SIZE);
-        map.put(WirelessSecurityError.RESULT_CODE, WirelessSecurityError.DATA_LENGTH_BYTE_SIZE);
-        map.put(Wup.RESULT_CODE, Wup.DATA_LENGTH_BYTE_SIZE);
-        DATA_LENGTH_BYTE_SIZE_MAP = Collections.unmodifiableMap(map);
-    }
+    public static DATA_LENGTH_BYTE_SIZE_MAP : {[key : number] : number} = {
+        /*
+        Ack.RESULT_CODE: Ack.DATA_LENGTH_BYTE_SIZE,
+        AditionalReceiveData.RESULT_CODE:  AditionalReceiveData.DATA_LENGTH_BYTE_SIZE,
+        ConnectionConfirmation.RESULT_CODE: ConnectionConfirmation.DATA_LENGTH_BYTE_SIZE,
+        ConnectionNotification.RESULT_CODE: ConnectionNotification.DATA_LENGTH_BYTE_SIZE,
+        ConnectionResult.RESULT_CODE: ConnectionResult.DATA_LENGTH_BYTE_SIZE,
+        EdScan.RESULT_CODE: EdScan.DATA_LENGTH_BYTE_SIZE,
+        Nack.RESULT_CODE: Nack.DATA_LENGTH_BYTE_SIZE,
+        ProfileParameter.RESULT_CODE: Nack.DATA_LENGTH_BYTE_SIZE,
+        ReceiveData.RESULT_CODE: ReceiveData.DATA_LENGTH_BYTE_SIZE,
+        Ring.RESULT_CODE: Ring.DATA_LENGTH_BYTE_SIZE,
+        Rssi.RESULT_CODE: Rssi.DATA_LENGTH_BYTE_SIZE,
+        SecurityConfig.RESULT_CODE: SecurityConfig.DATA_LENGTH_BYTE_SIZE,
+        WirelessSecurityError.RESULT_CODE: WirelessSecurityError.DATA_LENGTH_BYTE_SIZE,
+        Wup.RESULT_CODE: Wup.DATA_LENGTH_BYTE_SIZE,
+        */
+    };
 
     /**
      * 結果コード
      */
-    protected int resultCode;
+    public resultCode : number;
 
     /**
      * 受信データ
      */
-    protected int[] datas;
+    public datas : number[];
 
     /**
      * @param resultCode 結果コード
      * @param datas      受信データ
      */
-    public Result(int resultCode, int[] datas) {
+    public Result(resultCode : number, datas : number[]) {
         this.resultCode = resultCode;
         this.datas = datas;
     }
@@ -56,7 +63,7 @@ public class Result {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
+    public getResultCode() : number {
         return this.resultCode;
     }
 }

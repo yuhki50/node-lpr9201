@@ -1,30 +1,31 @@
-package com.yuhki50.lpr9201.parser.packet;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
 
 /**
  * セキュリティ状態取得
  */
-public class SecurityConfig implements IParsePacket {
+class SecurityConfig implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x93;
+    public static RESULT_CODE : number = 0x93;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    public static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    public result : Result;
 
     /**
      * セキュリティ状態取得
      *
      * @param result 結果クラス
      */
-    public SecurityConfig(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -33,8 +34,8 @@ public class SecurityConfig implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return SecurityConfig.RESULT_CODE;
     }
 
     /**
@@ -42,8 +43,8 @@ public class SecurityConfig implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return SecurityConfig.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -51,8 +52,8 @@ public class SecurityConfig implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == SecurityConfig.RESULT_CODE;
     }
 
     /**
@@ -60,7 +61,7 @@ public class SecurityConfig implements IParsePacket {
      *
      * @return セキュリティ状態
      */
-    public boolean getSecurityState() {
+    public getSecurityState() : boolean {
         return this.result.datas[0] == 0x01;
     }
 }

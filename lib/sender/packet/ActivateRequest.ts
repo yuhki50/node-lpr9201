@@ -1,23 +1,18 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * 結果
  * 成功時: Ack
  * 失敗時: Nack
  */
-public class ActivateRequest implements ISendPacket {
+class ActivateRequest implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x0B;
+    private static COMMAND_ID : number = 0x0B;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 起動要求
@@ -31,8 +26,8 @@ public class ActivateRequest implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return ActivateRequest.COMMAND_ID;
     }
 
     /**
@@ -40,8 +35,8 @@ public class ActivateRequest implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ActivateRequest.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -49,7 +44,7 @@ public class ActivateRequest implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>();
+    public serialize() : number[] {
+        return [];
     }
 }

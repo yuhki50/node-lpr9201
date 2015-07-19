@@ -1,8 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * 結果
  * 読出し成功時: Rssi
@@ -10,16 +5,16 @@ import java.util.List;
  *
  * 最後に受信した自ノード宛の有効なデータの RSSI 値を返します。 マルチホップの中継機として使用した場合、中継データの RSSI 値は保存されません。
  */
-public class ReadRssiData implements ISendPacket {
+class ReadRssiData implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x05;
+    private static COMMAND_ID : number = 0x05;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * RSSI データ読出し
@@ -34,8 +29,8 @@ public class ReadRssiData implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return ReadRssiData.COMMAND_ID;
     }
 
     /**
@@ -43,8 +38,8 @@ public class ReadRssiData implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ReadRssiData.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -52,7 +47,7 @@ public class ReadRssiData implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>();
+    public serialize() : number[] {
+        return [];
     }
 }

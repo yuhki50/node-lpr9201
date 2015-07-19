@@ -1,35 +1,33 @@
-package com.yuhki50.lpr9201.sender;
+/// <reference path='../util/ByteUtil.ts' />
+/// <reference path='../util/Checksum.ts' />
+/// <reference path='ISender.ts' />
+/// <reference path='packet/ISendPacket.ts' />
 
-import com.yuhki50.lpr9201.util.Util;
-import com.yuhki50.lpr9201.sender.packet.ISendPacket;
+class Sender {
+    protected senderInstance : ISender;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class Sender {
-    protected ISender senderInstance;
-
-    private static final Integer[] START_BYTES = new Integer[]{0x5A, 0xA5};
+    private static START_BYTES : number[] = [0x5A, 0xA5];
 
     /**
      *
      */
-    public Sender() {
+    /* //FIXME
+    public constructor() {
         this.senderInstance = null;
     }
+    */
 
     /**
      * @param sender
      */
-    public Sender(ISender sender) {
+    public constructor(sender : ISender) {
         this.senderInstance = sender;
     }
 
     /**
      * @param sender
      */
-    public void setSender(ISender sender) {
+    public setSender(sender : ISender) : void {
         this.senderInstance = sender;
     }
 
@@ -38,31 +36,27 @@ public class Sender {
      *
      * @param sendPacket
      */
-    public void send(ISendPacket sendPacket) {
-        List<Integer> packet = new ArrayList<Integer>();
+    public send(sendPacket : ISendPacket) : void {
+        var packet : number[] = [];
 
         // start
-        packet.addAll(Arrays.asList(START_BYTES));
+        packet = packet.concat(Sender.START_BYTES);
 
         // command
-        packet.add(sendPacket.getCommandId());
+        packet.push(sendPacket.getCommandId());
 
         // data length
-        List<Integer> serializedData = sendPacket.serialize();
-        packet.addAll(Arrays.asList(Util.splitBigEndian(serializedData.size(), sendPacket.getDataLengthByteSize())));
+        var serializedData : number[] = sendPacket.serialize();
+        packet = packet.concat(ByteUtil.splitBigEndian(serializedData.length, sendPacket.getDataLengthByteSize()));
 
         // data
-        packet.addAll(serializedData);
+        packet = packet.concat(serializedData);
 
         // checksum
-        int checksum = 0;
-        for (Integer p : packet) {
-            checksum ^= p;
-        }
-        packet.add(checksum);
+        packet.push(Checksum.calculate(packet));
 
-        if (senderInstance != null) {
-            senderInstance.write(packet.toArray(new Integer[packet.size()]));
+        if (this.senderInstance != null) {
+            this.senderInstance.write(packet);
         }
     }
 }

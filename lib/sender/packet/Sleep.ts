@@ -1,8 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * 結果
  * 成功時: なし (Sleep状態に入ります)
@@ -13,18 +8,16 @@ import java.util.List;
  * 受信データが残っている場合や、マルチホップ中継動作中等の処理中は NACK になる
  * マルチホップ通信を使用する場合は、Sleep 状態に入れない
  */
-
-
-public class Sleep implements ISendPacket {
+class Sleep implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x09;
+    private static COMMAND_ID : number = 0x09;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * Sleep設定
@@ -40,8 +33,8 @@ public class Sleep implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return Sleep.COMMAND_ID;
     }
 
     /**
@@ -49,8 +42,8 @@ public class Sleep implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return Sleep.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -58,7 +51,7 @@ public class Sleep implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>();
+    public serialize() : number[] {
+        return [];
     }
 }

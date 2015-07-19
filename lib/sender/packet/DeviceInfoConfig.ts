@@ -1,47 +1,38 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import com.yuhki50.lpr9201.util.Util;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
 /*
  * 結果
  * 読出し成功時: Ack
  * 読出し失敗時: Nack
  */
-public class DeviceInfoConfig implements ISendPacket {
+class DeviceInfoConfig implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x21;
+    private static COMMAND_ID : number = 0x21;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * デバイスIndex  0x00 ~ 0x40
      */
-    public int deviceIndex;
+    public deviceIndex : number;
 
     /**
      * 0x0001 ~ 0x3FFF
      */
-    public int panId;
+    public panId : number;
 
     /**
      * ショートアドレス  0x0000 ~ 0xFFFD
      */
-    public int shortAddress;
+    public shortAddress : number;
 
     /**
      * IEEEアドレス  0x0000000000000001 ~ 0xFFFFFFFFFFFFFFFF
      */
-    public long ieeeAddress;
+    public ieeeAddress : number;
 
     /**
      * デバイス情報設定
@@ -52,7 +43,7 @@ public class DeviceInfoConfig implements ISendPacket {
      * @param shortAddress ショートアドレス  0x0000 ~ 0xFFFD
      * @param ieeeAddress  IEEEアドレス  0x0000000000000001 ~ 0xFFFFFFFFFFFFFFFF
      */
-    public DeviceInfoConfig(int deviceIndex, int panId, int shortAddress, long ieeeAddress) {
+    public DeviceInfoConfig(deviceIndex : number, panId : number, shortAddress : number, ieeeAddress : number) {
         this.deviceIndex = deviceIndex;
         this.panId = panId;
         this.shortAddress = shortAddress;
@@ -64,8 +55,8 @@ public class DeviceInfoConfig implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return DeviceInfoConfig.COMMAND_ID;
     }
 
     /**
@@ -73,8 +64,8 @@ public class DeviceInfoConfig implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return DeviceInfoConfig.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -82,7 +73,7 @@ public class DeviceInfoConfig implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
+    public serialize() : number[] {
         List<Integer> datas = new ArrayList<Integer>();
         datas.addAll(Arrays.asList(Util.splitBigEndian(this.panId, 2)));
         datas.addAll(Arrays.asList(Util.splitBigEndian(this.shortAddress, 2)));

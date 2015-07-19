@@ -1,6 +1,4 @@
-package com.yuhki50.lpr9201.parser.option;
-
-public enum RateType {
+enum RateType {
     /**
      * 50kbps
      */

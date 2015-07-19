@@ -1,8 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * 結果
  * 設定成功時: ReceiveData
@@ -10,16 +5,16 @@ import java.util.List;
  *
  * 受信データバッファは2段です。 受信データバッファにデータが2段埋まっている場合は、受信した順番でデータを読み出せます。
  */
-public class ReadReceiveData implements ISendPacket {
+class ReadReceiveData implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x04;
+    private static COMMAND_ID : number = 0x04;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信データ読出し
@@ -34,8 +29,8 @@ public class ReadReceiveData implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return ReadReceiveData.COMMAND_ID;
     }
 
     /**
@@ -43,8 +38,8 @@ public class ReadReceiveData implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ReadReceiveData.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -52,7 +47,7 @@ public class ReadReceiveData implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>();
+    public serialize() : number[] {
+        return [];
     }
 }

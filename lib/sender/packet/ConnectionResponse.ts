@@ -1,11 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import com.yuhki50.lpr9201.util.Util;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /*
  * 結果
  * 成功時: ConnectionResult
@@ -15,31 +7,31 @@ import java.util.List;
  *   0x01: 失敗(5.2.12接続結果 参照)
  *   0xDB以上: 5.2.3NACK を参照
  */
-public class ConnectionResponse implements ISendPacket {
+class ConnectionResponse implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x0D;
+    private static COMMAND_ID : number = 0x0D;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 子接続の可否
      */
-    public boolean responseType;
+    public responseType : boolean;
 
     /**
      * 許可IEEEアドレス
      */
-    public long ieeeAddress;
+    public ieeeAddress : number;
 
     /**
      * 子側に設定するショートアドレス
      */
-    public int childShortAddress;
+    public childShortAddress : number;
 
     /**
      * 接続応答
@@ -49,7 +41,7 @@ public class ConnectionResponse implements ISendPacket {
      * @param ieeeAddress       許可IEEEアドレス (接続通知と同じIEEEアドレスを設定してください)
      * @param childShortAddress 子側に設定するショートアドレス
      */
-    public ConnectionResponse(boolean responseType, long ieeeAddress, int childShortAddress) {
+    public ConnectionResponse(responseType : boolean, ieeeAddress : number, childShortAddress : number) {
         this.responseType = responseType;
         this.ieeeAddress = ieeeAddress;
         this.childShortAddress = childShortAddress;
@@ -60,8 +52,8 @@ public class ConnectionResponse implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number{
+        return ConnectionResponse.COMMAND_ID;
     }
 
     /**
@@ -69,8 +61,8 @@ public class ConnectionResponse implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ConnectionResponse.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -78,11 +70,11 @@ public class ConnectionResponse implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        List<Integer> datas = new ArrayList<Integer>();
-        datas.add(this.responseType ? 1 : 0);
-        datas.addAll(Arrays.asList(Util.splitBigEndian(this.ieeeAddress, 8)));
-        datas.addAll(Arrays.asList(Util.splitBigEndian(this.childShortAddress, 2)));
+    public serialize() : number[] {
+        var datas : number[]= [];
+        datas.push(this.responseType ? 1 : 0);
+        datas = datas.concat(Arrays.asList(Util.splitBigEndian(this.ieeeAddress, 8)));
+        datas = datas.concat(Arrays.asList(Util.splitBigEndian(this.childShortAddress, 2)));
         return datas;
     }
 }

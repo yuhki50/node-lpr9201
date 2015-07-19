@@ -1,31 +1,23 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import com.yuhki50.lpr9201.sender.option.ProfileParameterType;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /*
  * 結果
  * 読出し成功時: ProfileParameter
  * 読出し失敗時: Nack
  */
-public class ReadProfileParameter implements ISendPacket {
+class ReadProfileParameter implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x03;
+    private static COMMAND_ID : number = 0x03;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * プロファイルパラメータ
      */
-    public ProfileParameterType profileParameterType;
+    public profileParameterType : ProfileParameterType;
 
     /**
      * プロファイルパラメータ設定読出し
@@ -33,7 +25,7 @@ public class ReadProfileParameter implements ISendPacket {
      *
      * @param profileParameterType プロファイルパラメータ
      */
-    public ReadProfileParameter(ProfileParameterType profileParameterType) {
+    public ReadProfileParameter(profileParameterType: ProfileParameterType) {
         this.profileParameterType = profileParameterType;
     }
 
@@ -42,8 +34,8 @@ public class ReadProfileParameter implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return ReadProfileParameter.COMMAND_ID;
     }
 
     /**
@@ -51,8 +43,8 @@ public class ReadProfileParameter implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ReadProfileParameter.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -60,7 +52,7 @@ public class ReadProfileParameter implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>(Collections.singletonList(this.profileParameterType.getParamNo() & 0xFF));
+    public serialize() : number[] {
+        return [this.profileParameterType.getParamNo() & 0xFF];
     }
 }

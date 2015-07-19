@@ -1,32 +1,32 @@
-package com.yuhki50.lpr9201.parser.packet;
-
-import com.yuhki50.lpr9201.parser.option.NackReason;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
+/// <reference path='../option/NackReason.ts' />
 
 /**
  * NACK
  */
-public class Nack implements IParsePacket {
+class Nack implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x82;
+    public static RESULT_CODE : number = 0x82;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    public static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    public result : Result;
 
     /**
      * NACK
      *
      * @param result 結果クラス
      */
-    public Nack(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -35,8 +35,8 @@ public class Nack implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return Nack.RESULT_CODE;
     }
 
     /**
@@ -44,8 +44,8 @@ public class Nack implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return Nack.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -53,8 +53,8 @@ public class Nack implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == Nack.RESULT_CODE;
     }
 
     /**
@@ -62,10 +62,10 @@ public class Nack implements IParsePacket {
      *
      * @return 理由コード
      */
-    public NackReason getReason() {
+    public getReason() : NackReason {
         try {
             return NackReason.getEnumByReasonCode(this.result.datas[0]);
-        } catch (Exception ex) {
+        } catch (e) {
             return NackReason.OTHER_ERROR;
         }
     }

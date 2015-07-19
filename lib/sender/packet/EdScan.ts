@@ -1,8 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * 結果
  * 成功時: EdScan
@@ -10,16 +5,16 @@ import java.util.List;
  *
  * マルチホップ動作中、ED スキャンは行ってはいけない
  */
-public class EdScan implements ISendPacket {
+class EdScan implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x0C;
+    private static COMMAND_ID : number = 0x0C;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * EDスキャン
@@ -34,8 +29,8 @@ public class EdScan implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return EdScan.COMMAND_ID;
     }
 
     /**
@@ -43,8 +38,8 @@ public class EdScan implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return EdScan.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -52,7 +47,7 @@ public class EdScan implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        return new ArrayList<Integer>();
+    public serialize() : number {
+        return [];
     }
 }

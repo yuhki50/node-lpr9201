@@ -1,32 +1,31 @@
-package com.yuhki50.lpr9201.parser.packet;
-
-import java.util.Arrays;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
 
 /**
  * 受信データ
  */
-public class ReceiveData implements IParsePacket {
+class ReceiveData implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x83;
+    public static RESULT_CODE : number = 0x83;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 2;
+    public static DATA_LENGTH_BYTE_SIZE : number = 2;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    public result : Result;
 
     /**
      * 受信データ
      *
      * @param result 結果クラス
      */
-    public ReceiveData(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -35,8 +34,8 @@ public class ReceiveData implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return ReceiveData.RESULT_CODE;
     }
 
     /**
@@ -44,8 +43,8 @@ public class ReceiveData implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return ReceiveData.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -53,8 +52,8 @@ public class ReceiveData implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == ReceiveData.RESULT_CODE;
     }
 
     /**
@@ -62,8 +61,7 @@ public class ReceiveData implements IParsePacket {
      *
      * @return データ
      */
-    public int[] getDatas() {
-        int[] datas = this.result.datas;
-        return Arrays.copyOf(datas, datas.length);
+    public getDatas() : number[] {
+        return this.result.datas.slice(0);
     }
 }

@@ -1,12 +1,3 @@
-package com.yuhki50.lpr9201.sender.packet;
-
-import com.yuhki50.lpr9201.sender.option.ProfileParameterType;
-import com.yuhki50.lpr9201.util.Util;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /*
  * 結果
  * 設定成功時: Ack
@@ -14,26 +5,26 @@ import java.util.List;
  *
  * このコマンドで FLASH への保存は行いません。
  */
-public class WriteProfileParameter implements ISendPacket {
+class WriteProfileParameter implements ISendPacket {
     /**
      * コマンドID
      */
-    protected static final int COMMAND_ID = 0x02;
+    private static COMMAND_ID : number = 0x02;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    private static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * プロファイルパラメータ
      */
-    public ProfileParameterType profileParameterType;
+    public profileParameterType : ProfileParameterType;
 
     /**
      * パラメータ設定値
      */
-    public long paramValue;
+    public paramValue : number;
 
     /**
      * プロファイルパラメータ設定
@@ -41,7 +32,7 @@ public class WriteProfileParameter implements ISendPacket {
      *
      * @param profileParameterType プロファイルパラメータ
      */
-    public WriteProfileParameter(ProfileParameterType profileParameterType, long paramValue) {
+    public WriteProfileParameter(profileParameterType : ProfileParameterType, paramValue : number) {
         this.profileParameterType = profileParameterType;
         this.paramValue = paramValue;
     }
@@ -51,8 +42,8 @@ public class WriteProfileParameter implements ISendPacket {
      *
      * @return コマンドID
      */
-    public int getCommandId() {
-        return COMMAND_ID;
+    public getCommandId() : number {
+        return WriteProfileParameter.COMMAND_ID;
     }
 
     /**
@@ -60,8 +51,8 @@ public class WriteProfileParameter implements ISendPacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return WriteProfileParameter.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -69,10 +60,10 @@ public class WriteProfileParameter implements ISendPacket {
      *
      * @return 構築したパケットをシリアライズしたデータ列
      */
-    public List<Integer> serialize() {
-        List<Integer> datas = new ArrayList<Integer>();
-        datas.add(this.profileParameterType.getParamNo());
-        datas.addAll(Arrays.asList(Util.splitBigEndian(this.paramValue, this.profileParameterType.getDataLengthByteSize())));
+    public serialize() : number[] {
+        var datas : number[] = [];
+        datas.push(this.profileParameterType.getParamNo());
+        datas = datas.concat(Util.splitBigEndian(this.paramValue, this.profileParameterType.getDataLengthByteSize()));
         return datas;
     }
 }
