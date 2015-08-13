@@ -1,9 +1,4 @@
-package com.yuhki50.lpr9201.util;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class ByteUtil {
+class ByteUtil {
     private ByteUtil() {
 
     }
@@ -15,14 +10,14 @@ public class ByteUtil {
      * @param length 出力する配列長
      * @return 切り出した数値の配列
      */
-    public static Integer[] splitBigEndian(long value, int length) {
-        List<Integer> list = new ArrayList<Integer>();
+    public static splitBigEndian(value:number, length:number):number[] {
+        var list:number[] = [];
 
-        for (int i = length - 1; i >= 0; i--) {
-            list.add((int) (value >>> (8 * i)) & 0xFF);
+        for (var i = length - 1; i >= 0; i--) {
+            list.push((value >>> (8 * i)) & 0xFF);
         }
 
-        return list.toArray(new Integer[list.size()]);
+        return list;
     }
 
     /**
@@ -32,14 +27,14 @@ public class ByteUtil {
      * @param length 出力する配列長
      * @return 切り出した数値の配列
      */
-    public static Integer[] splitLittleEndian(long value, int length) {
-        List<Integer> list = new ArrayList<Integer>();
+    public static splitLittleEndian(value:number, length:number):number[] {
+        var list:number[] = [];
 
-        for (int i = 0; i < length; i++) {
-            list.add((int) (value >>> (8 * i)) & 0xFF);
+        for (var i = 0; i < length; i++) {
+            list.push((value >>> (8 * i)) & 0xFF);
         }
 
-        return list.toArray(new Integer[list.size()]);
+        return list;
     }
 
     /**
@@ -48,11 +43,11 @@ public class ByteUtil {
      * @param values 結合する配列
      * @return 結合された数値
      */
-    public static long mergeBigEndian(int[] values) {
-        long dest = 0;
+    public static mergeBigEndian(values:number[]):number {
+        var dest = 0;
 
-        for (int value : values) {
-            dest = (dest << 8) | value;
+        for (var i = 0; i < values.length; i++) {
+            dest = (dest << 8) | values[i];
         }
 
         return dest;
@@ -64,10 +59,10 @@ public class ByteUtil {
      * @param values 結合する配列
      * @return 結合された数値
      */
-    public static long mergeLittleEndian(int[] values) {
-        long dest = 0;
+    public static mergeLittleEndian(values:number[]):number {
+        var dest = 0;
 
-        for (int i = 1; i <= values.length; i++) {
+        for (var i = 1; i <= values.length; i++) {
             dest = (dest << 8) | values[values.length - i];
         }
 
