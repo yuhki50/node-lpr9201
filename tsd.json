@@ -13,6 +13,15 @@
     },
     "node/node.d.ts": {
       "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
+    },
+    "gulp/gulp.d.ts": {
+      "commit": "e95958ac847d9a343bdc8d7cbc796a5f6da29f71"
+    },
+    "gulp-typescript/gulp-typescript.d.ts": {
+      "commit": "e95958ac847d9a343bdc8d7cbc796a5f6da29f71"
+    },
+    "gulp-mocha/gulp-mocha.d.ts": {
+      "commit": "e95958ac847d9a343bdc8d7cbc796a5f6da29f71"
     }
   }
 }
