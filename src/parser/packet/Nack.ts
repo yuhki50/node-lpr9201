@@ -1,5 +1,6 @@
 /// <reference path='IParsePacket.ts' />
 /// <reference path='Result.ts' />
+/// <reference path='../option/NackReason.ts' />
 
 /**
  * NACK
@@ -64,10 +65,10 @@ class Nack implements IParsePacket {
      * @return 理由コード
      */
     public getReason() : NackReason {
-        //try {
-            return NackReason.getEnumByReasonCode(this.result.datas[0]);
-        //} catch (Exception ex) {
-        //    return NackReason.OTHER_ERROR;
-        //}
+        try {
+            return _NackReason.getEnumByReasonCode(this.result.datas[0]);
+        } catch (e) {
+            return NackReason.OTHER_ERROR;
+        }
     }
 }

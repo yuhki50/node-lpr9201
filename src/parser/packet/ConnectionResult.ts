@@ -1,5 +1,6 @@
 /// <reference path='IParsePacket.ts' />
 /// <reference path='Result.ts' />
+/// <reference path='../option/ChildConnectionResult.ts' />
 
 /**
  * 接続結果
@@ -64,6 +65,6 @@ class ConnectionResult implements IParsePacket {
      * @return 子接続の結果
      */
     public getChildConnectionResult() : ChildConnectionResult {
-        return ChildConnectionResult.getEnumByResultCode(this.result.datas[0]);
+        return _ChildConnectionResult.getEnumByResultCode(this.result.datas[0]);
     }
 }
