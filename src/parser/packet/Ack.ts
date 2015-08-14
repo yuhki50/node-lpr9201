@@ -1,30 +1,34 @@
-package com.yuhki50.lpr9201.parser.packet;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
 
 /**
  * ACK
  */
-public class Ack implements IParsePacket {
+class Ack implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x81;
+    //protected static const RESULT_CODE : number = 0x81;
+    protected static RESULT_CODE : number = 0x81;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 1;
+    //protected static const DATA_LENGTH_BYTE_SIZE : number = 1;
+    protected static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    //protected result : Result;
+    protected result : Result;
 
     /**
      * Ack
      *
      * @param result 結果クラス
      */
-    public Ack(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -33,8 +37,8 @@ public class Ack implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return Ack.RESULT_CODE;
     }
 
     /**
@@ -42,8 +46,8 @@ public class Ack implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return Ack.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -51,8 +55,8 @@ public class Ack implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == Ack.RESULT_CODE;
     }
 
     /**
@@ -60,11 +64,11 @@ public class Ack implements IParsePacket {
      *
      * @return 自ノードアドレス
      */
-    public int getNodeAddress() {
-        int[] datas = this.result.datas;
+    public getNodeAddress() : number {
+        var datas = this.result.datas;
 
         if (!this.hasNodeAddress()) {
-            throw new RuntimeException("Self node address not found");
+            throw new Error("Self node address not found");
         }
 
         return (datas[0] << 8) | datas[1];
@@ -75,7 +79,7 @@ public class Ack implements IParsePacket {
      *
      * @return ノードアドレスを取得できる場合はtrue
      */
-    public boolean hasNodeAddress() {
+    public hasNodeAddress() : boolean {
         return this.result.datas.length >= 2;
     }
 }

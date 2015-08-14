@@ -1,34 +1,34 @@
-package com.yuhki50.lpr9201.parser.packet;
-
-import com.yuhki50.lpr9201.parser.option.ReceiveDataType;
-
-import java.util.Arrays;
+/// <reference path='IParsePacket.ts' />
+/// <reference path='Result.ts' />
+/// <reference path='../option/ReceiveDataType.ts' />
 
 /**
  * 付加受信データ
  */
-public class AditionalReceiveData implements IParsePacket {
+class AditionalReceiveData implements IParsePacket {
     /**
      * 結果コード
      */
-    protected static final int RESULT_CODE = 0x90;
+    //protected static const RESULT_CODE : number = 0x90;
+    protected static RESULT_CODE : number = 0x90;
 
     /**
      * データ長のバイト数
      */
-    protected static final int DATA_LENGTH_BYTE_SIZE = 2;
+    //protected static const DATA_LENGTH_BYTE_SIZE : number = 2;
+    protected static DATA_LENGTH_BYTE_SIZE : number = 2;
 
     /**
      * 受信したリザルトデータ
      */
-    protected Result result;
+    protected result : Result;
 
     /**
      * 付加受信データ
      *
      * @param result 結果クラス
      */
-    public AditionalReceiveData(Result result) {
+    public constructor(result : Result) {
         this.result = result;
     }
 
@@ -37,8 +37,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return 結果コード
      */
-    public int getResultCode() {
-        return RESULT_CODE;
+    public getResultCode() : number {
+        return AditionalReceiveData.RESULT_CODE;
     }
 
     /**
@@ -46,8 +46,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return データ長のバイト数
      */
-    public int getDataLengthByteSize() {
-        return DATA_LENGTH_BYTE_SIZE;
+    public getDataLengthByteSize() : number {
+        return AditionalReceiveData.DATA_LENGTH_BYTE_SIZE;
     }
 
     /**
@@ -55,8 +55,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return true:パース可能, false: パース不可
      */
-    public boolean canParse() {
-        return this.result != null && this.result.resultCode == RESULT_CODE;
+    public canParse() : boolean {
+        return this.result != null && this.result.resultCode == AditionalReceiveData.RESULT_CODE;
     }
 
     /**
@@ -65,7 +65,7 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return RSSI値
      */
-    public int getRssi() {
+    public getRssi() : number {
         return this.result.datas[0] | ~0xFF;
     }
 
@@ -74,8 +74,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return データ種別
      */
-    public ReceiveDataType getReceiveDataType() {
-        return ReceiveDataType.getEnumByOrdinal(this.result.datas[1]);
+    public getReceiveDataType() : ReceiveDataType {
+        return ReceiveDataType_.getEnumByOrdinal(this.result.datas[1]);
     }
 
     /**
@@ -83,8 +83,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return 送信元アドレス
      */
-    public int getSourceAddress() {
-        int[] datas = this.result.datas;
+    public getSourceAddress() : number {
+        var datas = this.result.datas;
         return (datas[2] << 8) | datas[3];
     }
 
@@ -93,8 +93,8 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return 直前送信元アドレス
      */
-    public int getJustBeforeSourceAddress() {
-        int[] datas = this.result.datas;
+    public getJustBeforeSourceAddress() : number {
+        var datas = this.result.datas;
         return (datas[4] << 8) | datas[5];
     }
 
@@ -103,9 +103,10 @@ public class AditionalReceiveData implements IParsePacket {
      *
      * @return データ
      */
-    public int[] getDatas() {
-        int[] datas = this.result.datas;
-        final int START_INDEX = 6;
-        return Arrays.copyOfRange(datas, START_INDEX, datas.length);
+    public getDatas() : number[] {
+        var datas = this.result.datas;
+        //const START_INDEX : number = 6;
+        var START_INDEX : number = 6;
+        return datas.slice(START_INDEX);
     }
 }
