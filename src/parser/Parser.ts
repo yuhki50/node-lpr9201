@@ -1,5 +1,6 @@
 /// <reference path="../util/ByteUtil.ts" />
 /// <reference path="../util/Checksum.ts" />
+/// <reference path="packet/Result.ts" />
 
 /**
  * データをパースするクラス
@@ -97,19 +98,18 @@ class Parser {
 
         // コマンドIDからデータ長サイズを取得する
         var commandId : number = this.receiveData[2];
-        if (!Result.DATA_LENGTH_BYTE_SIZE_MAP.containsKey(commandId)) {
+        if (!Result.DATA_LENGTH_BYTE_SIZE_MAP[commandId]) {  //FIXME
             this.clearBuffer();
             return null;
         }
 
-        var dataLengthByteSize : number = Result.DATA_LENGTH_BYTE_SIZE_MAP.get(commandId);
+        var dataLengthByteSize : number = Result.DATA_LENGTH_BYTE_SIZE_MAP[commandId];
         if (this.receiveDataLength <= Parser.START_BYTE_LENGTH + dataLengthByteSize) {
             return null;
         }
 
         // チェックサムを受信するまで待つ
-        var dataLength : number = ByteUtil.mergeBigEndian(Arrays.copyOfRange( //
-                this.receiveData, //
+        var dataLength : number = ByteUtil.mergeBigEndian(this.receiveData.slice( //
                 Parser.START_BYTE_LENGTH + Parser.COMMAND_BYTE_LENGTH, //
                 Parser.START_BYTE_LENGTH + Parser.COMMAND_BYTE_LENGTH + dataLengthByteSize));
         if (this.receiveDataLength < Parser.START_BYTE_LENGTH + Parser.COMMAND_BYTE_LENGTH + dataLengthByteSize + dataLength + Parser.CHECKSUM_BYTE_LENGTH) {
@@ -118,11 +118,10 @@ class Parser {
 
         var result : Result = null;
 
-        // CheckSumをチェック
+        // Checksumをチェック
         var checksum : number = this.receiveData[this.receiveDataLength - 1];
-        if (checksum == Checksum.calculate(this.receiveData, this.receiveDataLength - 1)) {
-            result = new Result(commandId, Arrays.copyOfRange( //
-                    this.receiveData, //
+        if (checksum == Checksum.calculateWithLength(this.receiveData, this.receiveDataLength - 1)) {
+            result = new Result(commandId, this.receiveData.slice( //
                     Parser.START_BYTE_LENGTH + Parser.COMMAND_BYTE_LENGTH + dataLengthByteSize, //
                     this.receiveDataLength - Parser.CHECKSUM_BYTE_LENGTH));
         }

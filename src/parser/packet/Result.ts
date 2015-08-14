@@ -54,7 +54,7 @@ class Result {
      * @param resultCode 結果コード
      * @param datas      受信データ
      */
-    public Result(resultCode : number, datas : number[]) {
+    public constructor(resultCode : number, datas : number[]) {
         this.resultCode = resultCode;
         this.datas = datas;
     }

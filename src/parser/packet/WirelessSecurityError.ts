@@ -1,5 +1,6 @@
 /// <reference path='IParsePacket.ts' />
 /// <reference path='Result.ts' />
+/// <reference path='../option/WirelessSecurityErrorType.ts' />
 
 /**
  * 無銭セキュリティエラー通知
@@ -64,7 +65,7 @@ class WirelessSecurityError implements IParsePacket {
      * @return エラー種別
      */
     public getErrorType() : WirelessSecurityErrorType {
-        return WirelessSecurityErrorType.getEnumByErrorCode(this.result.datas[0]);
+        return _WirelessSecurityErrorType.getEnumByErrorCode(this.result.datas[0]);
     }
 
     /**
