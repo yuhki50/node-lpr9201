@@ -29,7 +29,7 @@
     "wireless module"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/lpr9201.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuhki50/node-lpr9201.git"
