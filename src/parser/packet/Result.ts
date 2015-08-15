@@ -21,7 +21,7 @@ class Result {
      * データ長バイトサイズ一覧
      */
     //public static final Map<Integer, Integer> DATA_LENGTH_BYTE_SIZE_MAP;
-    public static DATA_LENGTH_BYTE_SIZE_MAP : {[key: number] : number} = {
+    //public static DATA_LENGTH_BYTE_SIZE_MAP : {[key: number] : number} = {
         //Ack.getResultCode(): Ack.getDataLengthByteSize(),
         //AditionalReceiveData.getResultCode(): AditionalReceiveData.getDataLengthByteSize(),
         //ConnectionConfirmation.getResultCode(): ConnectionConfirmation.getDataLengthByteSize(),
@@ -36,7 +36,72 @@ class Result {
         //SecurityConfig.getResultCode(): SecurityConfig.getDataLengthByteSize(),
         //WirelessSecurityError.getResultCode(): WirelessSecurityError.getDataLengthByteSize(),
         //Wup.getResultCode(): Wup.getDataLengthByteSize(),
-    };
+    //};
+
+    /**
+     * データ長バイトサイズがあるか
+     *
+     * @param commandId
+     * @return 結果コード
+     */
+    public static hasDataLengthByteSize(commandId: number) : boolean {
+        return Result.getDataLengthByteSize(commandId) != 0;
+    }
+
+    /**
+     * データ長バイトサイズを取得する
+     *
+     * @param commandId
+     * @return 結果コード
+     */
+    public static getDataLengthByteSize(commandId : number) : number {
+        switch (commandId) {
+            case Ack.RESULT_CODE:
+                return Ack.DATA_LENGTH_BYTE_SIZE;
+
+            case AditionalReceiveData.RESULT_CODE:
+                return AditionalReceiveData.DATA_LENGTH_BYTE_SIZE;
+
+            case ConnectionConfirmation.RESULT_CODE:
+                return ConnectionConfirmation.DATA_LENGTH_BYTE_SIZE;
+
+            case ConnectionNotification.RESULT_CODE:
+                return ConnectionNotification.DATA_LENGTH_BYTE_SIZE;
+
+            case ConnectionResult.RESULT_CODE:
+                return ConnectionResult.DATA_LENGTH_BYTE_SIZE;
+
+            case EdScan.RESULT_CODE:
+                return EdScan.DATA_LENGTH_BYTE_SIZE;
+
+            case Nack.RESULT_CODE:
+                return Nack.DATA_LENGTH_BYTE_SIZE;
+
+            case ProfileParameter.RESULT_CODE:
+                return Nack.DATA_LENGTH_BYTE_SIZE;
+
+            case ReceiveData.RESULT_CODE:
+                return ReceiveData.DATA_LENGTH_BYTE_SIZE;
+
+            case Ring.RESULT_CODE:
+                return Ring.DATA_LENGTH_BYTE_SIZE;
+
+            case Rssi.RESULT_CODE:
+                return Rssi.DATA_LENGTH_BYTE_SIZE;
+
+            case SecurityConfig.RESULT_CODE:
+                return SecurityConfig.DATA_LENGTH_BYTE_SIZE;
+
+            case WirelessSecurityError.RESULT_CODE:
+                return WirelessSecurityError.DATA_LENGTH_BYTE_SIZE;
+
+            case Wup.RESULT_CODE:
+                return Wup.DATA_LENGTH_BYTE_SIZE;
+
+            default:
+                return 0;
+        }
+    }
 
     /**
      * 結果コード

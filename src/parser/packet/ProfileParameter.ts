@@ -10,13 +10,13 @@ class ProfileParameter implements IParsePacket {
      * 結果コード
      */
     //protected static const RESULT_CODE : number = 0x85;
-    protected static RESULT_CODE : number = 0x85;
+    public static RESULT_CODE : number = 0x85;
 
     /**
      * データ長のバイト数
      */
     //protected static const DATA_LENGTH_BYTE_SIZE : number = 1;
-    protected static DATA_LENGTH_BYTE_SIZE : number = 1;
+    public static DATA_LENGTH_BYTE_SIZE : number = 1;
 
     /**
      * 受信したリザルトデータ

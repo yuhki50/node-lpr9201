@@ -9,13 +9,13 @@ class ReceiveData implements IParsePacket {
      * 結果コード
      */
     //protected static const RESULT_CODE : number = 0x83;
-    protected static RESULT_CODE : number = 0x83;
+    public static RESULT_CODE : number = 0x83;
 
     /**
      * データ長のバイト数
      */
     //protected static const DATA_LENGTH_BYTE_SIZE : number = 2;
-    protected static DATA_LENGTH_BYTE_SIZE : number = 2;
+    public static DATA_LENGTH_BYTE_SIZE : number = 2;
 
     /**
      * 受信したリザルトデータ

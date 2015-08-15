@@ -98,12 +98,12 @@ class Parser {
 
         // コマンドIDからデータ長サイズを取得する
         var commandId : number = this.receiveData[2];
-        if (!Result.DATA_LENGTH_BYTE_SIZE_MAP[commandId]) {  //FIXME
+        if (!Result.hasDataLengthByteSize[commandId]) {  //FIXME
             this.clearBuffer();
             return null;
         }
 
-        var dataLengthByteSize : number = Result.DATA_LENGTH_BYTE_SIZE_MAP[commandId];
+        var dataLengthByteSize : number = Result.getDataLengthByteSize[commandId];
         if (this.receiveDataLength <= Parser.START_BYTE_LENGTH + dataLengthByteSize) {
             return null;
         }
