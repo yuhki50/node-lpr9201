@@ -7,7 +7,9 @@ var merge = require('merge2');
 
 var tsProject = ts.createProject({
   declarationFiles: true,
-  noExternalResolve: true
+  noExternalResolve: true,
+  target: 'ES3',
+  module: 'commonjs',
 });
 
 gulp.task('typescript:build', () => {
@@ -15,14 +17,17 @@ gulp.task('typescript:build', () => {
     .pipe(ts(tsProject));
 
   return merge([
-    tsResult.dts.pipe(concat('lpr9201.d.ts')),  // 定義ファイル
-    tsResult.js.pipe(concat('lpr9201.js')),  // JavaScriptファイル
+    // 定義ファイル
+    tsResult.dts
+      .pipe(concat('lpr9201.d.ts')),
+    // JavaScriptファイル
+    tsResult.js
+      .pipe(concat('lpr9201.js')),
   ].map((value, index, arr) => {
     return value.pipe(gulp.dest('lib'))
   }));
 });
 
-gulp.task('typescript:build:watch', ['typescript:compile'], () => {
-  gulp.watch('src/**/*.ts', ['scripts']);
+gulp.task('typescript:build:watch', ['typescript:build'], () => {
+  gulp.watch('src/**/*.ts', ['typescript:build']);
 });
-
